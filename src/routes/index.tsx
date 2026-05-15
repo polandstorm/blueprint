@@ -192,19 +192,8 @@ function BeePrimeLanding() {
       {/* HERO */}
       <section className="bp-honeycomb relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
-          {/* Image slot */}
-          <div className="bp-reveal mb-10 overflow-hidden rounded-sm border border-border">
-            <img
-              src={heroImage}
-              alt="Médico empresário no comando da clínica"
-              width={1280}
-              height={1280}
-              className="h-[260px] w-full object-cover md:h-[420px]"
-            />
-          </div>
-
-          <div className="grid gap-12 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
+          <div className="grid gap-12 md:grid-cols-12 md:items-center">
+            <div className="md:col-span-7">
               <span className="inline-flex items-center gap-2 rounded-[50px] border border-primary/40 bg-primary/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-primary">
                 <BeeLogo /> Consultoria Híbrida BP
               </span>
@@ -225,7 +214,7 @@ function BeePrimeLanding() {
                   href="#oferta"
                   className="inline-flex items-center gap-2 rounded-[50px] bg-primary px-6 py-3.5 text-[15px] font-semibold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  Garantir minha vaga <ArrowRight size={18} />
+                  Aplicar para uma vaga <ArrowRight size={18} />
                 </a>
                 <a
                   href="#metodo"
@@ -234,12 +223,26 @@ function BeePrimeLanding() {
                   Conhecer o Método
                 </a>
               </div>
+
+              <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <Stat value="R$100M+" label="Geridos por clientes BP" />
+                <Stat value="8 estados + PY" label="Abrangência territorial" />
+                <Stat value="12 meses" label="Acompanhamento contínuo" />
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 md:col-span-4 sm:grid-cols-3 md:grid-cols-1">
-              <Stat value="R$100M+" label="Geridos por clientes BP" />
-              <Stat value="8 estados + PY" label="Abrangência territorial" />
-              <Stat value="12 meses" label="Acompanhamento contínuo" />
+            {/* Image slot — right side */}
+            <div className="bp-reveal md:col-span-5">
+              <div className="relative overflow-hidden rounded-sm border border-border">
+                <img
+                  src={heroImage}
+                  alt="Médico empresário no comando da clínica"
+                  width={1280}
+                  height={1280}
+                  className="h-[360px] w-full object-cover md:h-[560px]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-primary/10" />
+              </div>
             </div>
           </div>
         </div>
