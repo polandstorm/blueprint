@@ -518,60 +518,8 @@ function BeePrimeLanding() {
         </div>
       </section>
 
-      {/* OFFER */}
-      <section id="oferta" className="border-t border-border bg-muted/40 py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <div className="bp-reveal grid gap-10 rounded-sm border border-primary/40 bg-card p-7 md:grid-cols-2 md:p-12">
-            <div>
-              <span className="text-[12px] font-mono uppercase tracking-[0.2em] text-primary">
-                08 — A oferta
-              </span>
-              <h2 className="mt-3 text-[28px] font-extrabold leading-tight md:text-[40px]">
-                Consultoria Empresarial BP — <span className="text-primary">12 meses.</span>
-              </h2>
-              <ul className="mt-7 space-y-3 text-[15px] text-foreground">
-                {[
-                  "Diagnóstico completo da clínica",
-                  "Plano de ação personalizado",
-                  "Reuniões online ilimitadas",
-                  "1 visita presencial por mês",
-                  "Acesso integral aos 7 pilares do Método Colmeia®",
-                ].map((t) => (
-                  <li key={t} className="flex gap-3">
-                    <Check size={18} className="mt-1 shrink-0 text-primary" />
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col justify-between rounded-sm border border-border bg-background p-7">
-              <div>
-                <div className="text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Investimento total
-                </div>
-                <div className="mt-2 text-[44px] font-extrabold leading-none text-foreground">
-                  R$ 96.000
-                </div>
-                <div className="mt-3 text-[15px] text-muted-foreground">
-                  Entrada + 11x de <strong className="text-foreground">R$ 8.000</strong>
-                </div>
-                <ul className="mt-6 space-y-2 text-[13px] text-muted-foreground">
-                  <li className="flex gap-2"><DollarSign size={14} className="mt-1 text-primary" /> Pagamento via boleto bancário.</li>
-                  <li className="flex gap-2"><MapPin size={14} className="mt-1 text-primary" /> Despesas dos encontros presenciais não inclusas.</li>
-                </ul>
-              </div>
-
-              <a
-                href="https://bpgestao.com.br/"
-                className="bp-pulse mt-8 inline-flex items-center justify-center gap-2 rounded-[50px] bg-primary px-6 py-4 text-[16px] font-bold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Garantir minha vaga <ArrowRight size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* APPLICATION FORM */}
+      <ApplicationSection />
 
       {/* FAQ */}
       <section id="faq" className="border-t border-border py-20 md:py-28">
