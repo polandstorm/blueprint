@@ -95,7 +95,7 @@ function Nav() {
           href="#oferta"
           className="bp-pulse inline-flex items-center gap-2 rounded-[50px] bg-primary px-5 py-2.5 text-[14px] font-semibold text-primary-foreground hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition"
         >
-          Garantir Minha Vaga <ArrowRight size={16} />
+          Aplicar agora <ArrowRight size={16} />
         </a>
       </nav>
     </header>
@@ -814,7 +814,7 @@ function BeePrimeLanding() {
               href="#oferta"
               className="bp-pulse inline-flex items-center gap-2 rounded-[50px] bg-primary px-7 py-4 text-[16px] font-bold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              Garantir minha vaga <ArrowRight size={18} />
+              Enviar minha aplicação <ArrowRight size={18} />
             </a>
             <a
               href="#metodo"
