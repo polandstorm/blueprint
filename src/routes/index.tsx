@@ -5,7 +5,6 @@ import {
   Check,
   ChevronDown,
   Users,
-  DollarSign,
   Heart,
   Megaphone,
   Smile,
@@ -15,6 +14,8 @@ import {
   Calendar,
   Wallet,
   Quote,
+  Send,
+  Loader2,
 } from "lucide-react";
 import heroImage from "@/assets/hero-bp.jpg";
 
@@ -173,6 +174,10 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 /* ---------- Page ---------- */
 function BeePrimeLanding() {
+  return <BeePrimeLandingInner />;
+}
+
+function BeePrimeLandingInner() {
   useReveal();
 
   const pillars = [
