@@ -5,7 +5,6 @@ import {
   Check,
   ChevronDown,
   Users,
-  DollarSign,
   Heart,
   Megaphone,
   Smile,
@@ -15,6 +14,8 @@ import {
   Calendar,
   Wallet,
   Quote,
+  Send,
+  Loader2,
 } from "lucide-react";
 import heroImage from "@/assets/hero-bp.jpg";
 
@@ -94,7 +95,7 @@ function Nav() {
           href="#oferta"
           className="bp-pulse inline-flex items-center gap-2 rounded-[50px] bg-primary px-5 py-2.5 text-[14px] font-semibold text-primary-foreground hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition"
         >
-          Garantir Minha Vaga <ArrowRight size={16} />
+          Aplicar agora <ArrowRight size={16} />
         </a>
       </nav>
     </header>
@@ -172,6 +173,258 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 /* ---------- Page ---------- */
+function ApplicationSection() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    clinic: "",
+    specialty: "",
+    revenue: "",
+    team: "",
+    challenge: "",
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+
+  function update<K extends keyof typeof form>(k: K, v: string) {
+    setForm((f) => ({ ...f, [k]: v }));
+  }
+
+  function validate() {
+    const e: Record<string, string> = {};
+    if (!form.name.trim() || form.name.length > 100) e.name = "Informe seu nome.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) || form.email.length > 255)
+      e.email = "E-mail inválido.";
+    if (!form.phone.trim() || form.phone.length > 30) e.phone = "Informe um telefone válido.";
+    if (!form.clinic.trim() || form.clinic.length > 120) e.clinic = "Informe a clínica.";
+    if (!form.specialty) e.specialty = "Selecione uma especialidade.";
+    if (!form.revenue) e.revenue = "Selecione o faturamento atual.";
+    if (!form.team) e.team = "Selecione o tamanho do time.";
+    if (form.challenge.length > 1000) e.challenge = "Máx. 1000 caracteres.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  }
+
+  function onSubmit(ev: React.FormEvent) {
+    ev.preventDefault();
+    if (!validate()) return;
+    setStatus("loading");
+    setTimeout(() => setStatus("success"), 900);
+  }
+
+  const inputCls =
+    "w-full rounded-sm border border-border bg-background px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary focus:border-primary transition";
+  const labelCls = "block text-[13px] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
+  const errCls = "mt-1 text-[12px] text-destructive";
+
+  return (
+    <section id="oferta" className="border-t border-border bg-muted/40 py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="bp-reveal grid gap-10 rounded-sm border border-primary/40 bg-card p-7 md:grid-cols-2 md:p-12">
+          {/* Left: pitch */}
+          <div>
+            <span className="text-[12px] font-mono uppercase tracking-[0.2em] text-primary">
+              08 — Aplicação
+            </span>
+            <h2 className="mt-3 text-[28px] font-extrabold leading-tight md:text-[40px]">
+              Aplique para a <span className="text-primary">Consultoria BP — 12 meses.</span>
+            </h2>
+            <p className="mt-5 text-[15px] text-muted-foreground">
+              Trabalhamos com turmas reduzidas. Sua aplicação é analisada por
+              um consultor BP e respondemos em até <strong className="text-foreground">48 horas úteis</strong>.
+            </p>
+
+            <ul className="mt-8 space-y-3 text-[15px] text-foreground">
+              {[
+                "Diagnóstico completo da clínica",
+                "Plano de ação sobre os 7 pilares",
+                "Reuniões online ilimitadas",
+                "1 visita presencial por mês",
+                "Acompanhamento híbrido por 12 meses",
+              ].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <Check size={18} className="mt-1 shrink-0 text-primary" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 rounded-sm border border-border bg-background p-5">
+              <div className="text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+                Investimento apresentado após aprovação
+              </div>
+              <div className="mt-2 flex items-center gap-2 text-[13px] text-muted-foreground">
+                <MapPin size={14} className="text-primary" />
+                Pagamento via boleto. Despesas dos encontros presenciais por conta da clínica.
+              </div>
+            </div>
+          </div>
+
+          {/* Right: form */}
+          {status === "success" ? (
+            <div className="flex flex-col items-center justify-center rounded-sm border border-primary/50 bg-primary/5 p-10 text-center">
+              <div className="rounded-full bg-primary/15 p-4">
+                <Check size={32} className="text-primary" />
+              </div>
+              <h3 className="mt-5 text-[24px] font-extrabold">Aplicação recebida.</h3>
+              <p className="mt-3 text-[15px] text-muted-foreground">
+                Um consultor BP entrará em contato em até 48 horas úteis pelo
+                e-mail e telefone informados.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              className="rounded-sm border border-border bg-background p-6 md:p-7"
+            >
+              <h3 className="text-[18px] font-bold">Formulário de aplicação</h3>
+              <p className="mt-1 text-[13px] text-muted-foreground">
+                Todos os campos com * são obrigatórios.
+              </p>
+
+              <div className="mt-6 grid gap-5">
+                <div>
+                  <label htmlFor="name" className={labelCls}>Nome completo *</label>
+                  <input
+                    id="name" type="text" maxLength={100} required
+                    value={form.name} onChange={(e) => update("name", e.target.value)}
+                    className={`mt-2 ${inputCls}`} placeholder="Dr. João da Silva"
+                    aria-invalid={!!errors.name}
+                  />
+                  {errors.name && <p className={errCls}>{errors.name}</p>}
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="email" className={labelCls}>E-mail *</label>
+                    <input
+                      id="email" type="email" maxLength={255} required
+                      value={form.email} onChange={(e) => update("email", e.target.value)}
+                      className={`mt-2 ${inputCls}`} placeholder="voce@clinica.com.br"
+                      aria-invalid={!!errors.email}
+                    />
+                    {errors.email && <p className={errCls}>{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className={labelCls}>WhatsApp *</label>
+                    <input
+                      id="phone" type="tel" maxLength={30} required
+                      value={form.phone} onChange={(e) => update("phone", e.target.value)}
+                      className={`mt-2 ${inputCls}`} placeholder="(11) 99999-9999"
+                      aria-invalid={!!errors.phone}
+                    />
+                    {errors.phone && <p className={errCls}>{errors.phone}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="clinic" className={labelCls}>Nome da clínica *</label>
+                  <input
+                    id="clinic" type="text" maxLength={120} required
+                    value={form.clinic} onChange={(e) => update("clinic", e.target.value)}
+                    className={`mt-2 ${inputCls}`} placeholder="Clínica Exemplo"
+                    aria-invalid={!!errors.clinic}
+                  />
+                  {errors.clinic && <p className={errCls}>{errors.clinic}</p>}
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="specialty" className={labelCls}>Especialidade *</label>
+                    <select
+                      id="specialty" required
+                      value={form.specialty} onChange={(e) => update("specialty", e.target.value)}
+                      className={`mt-2 ${inputCls}`}
+                      aria-invalid={!!errors.specialty}
+                    >
+                      <option value="">Selecione</option>
+                      <option>Odontologia</option>
+                      <option>Dermatologia</option>
+                      <option>Ortopedia</option>
+                      <option>Estética avançada</option>
+                      <option>Multiespecialidade</option>
+                      <option>Outra</option>
+                    </select>
+                    {errors.specialty && <p className={errCls}>{errors.specialty}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="team" className={labelCls}>Tamanho do time *</label>
+                    <select
+                      id="team" required
+                      value={form.team} onChange={(e) => update("team", e.target.value)}
+                      className={`mt-2 ${inputCls}`}
+                      aria-invalid={!!errors.team}
+                    >
+                      <option value="">Selecione</option>
+                      <option>1 a 3 pessoas</option>
+                      <option>4 a 10 pessoas</option>
+                      <option>11 a 25 pessoas</option>
+                      <option>26+ pessoas</option>
+                    </select>
+                    {errors.team && <p className={errCls}>{errors.team}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="revenue" className={labelCls}>Faturamento mensal atual *</label>
+                  <select
+                    id="revenue" required
+                    value={form.revenue} onChange={(e) => update("revenue", e.target.value)}
+                    className={`mt-2 ${inputCls}`}
+                    aria-invalid={!!errors.revenue}
+                  >
+                    <option value="">Selecione</option>
+                    <option>Até R$ 50 mil</option>
+                    <option>R$ 50 mil – R$ 150 mil</option>
+                    <option>R$ 150 mil – R$ 500 mil</option>
+                    <option>R$ 500 mil – R$ 1 milhão</option>
+                    <option>Acima de R$ 1 milhão</option>
+                  </select>
+                  {errors.revenue && <p className={errCls}>{errors.revenue}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="challenge" className={labelCls}>
+                    Maior desafio hoje (opcional)
+                  </label>
+                  <textarea
+                    id="challenge" rows={4} maxLength={1000}
+                    value={form.challenge} onChange={(e) => update("challenge", e.target.value)}
+                    className={`mt-2 ${inputCls} resize-none`}
+                    placeholder="Conte rapidamente o que mais te trava no momento."
+                  />
+                  {errors.challenge && <p className={errCls}>{errors.challenge}</p>}
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="bp-pulse mt-8 inline-flex w-full items-center justify-center gap-2 rounded-[50px] bg-primary px-6 py-4 text-[16px] font-bold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-70"
+              >
+                {status === "loading" ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" /> Enviando…
+                  </>
+                ) : (
+                  <>
+                    Enviar aplicação <Send size={16} />
+                  </>
+                )}
+              </button>
+              <p className="mt-3 text-center text-[12px] text-muted-foreground">
+                Ao enviar você concorda com nossos Termos e Política de Privacidade.
+              </p>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BeePrimeLanding() {
   useReveal();
 
@@ -192,19 +445,8 @@ function BeePrimeLanding() {
       {/* HERO */}
       <section className="bp-honeycomb relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
-          {/* Image slot */}
-          <div className="bp-reveal mb-10 overflow-hidden rounded-sm border border-border">
-            <img
-              src={heroImage}
-              alt="Médico empresário no comando da clínica"
-              width={1280}
-              height={1280}
-              className="h-[260px] w-full object-cover md:h-[420px]"
-            />
-          </div>
-
-          <div className="grid gap-12 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
+          <div className="grid gap-12 md:grid-cols-12 md:items-center">
+            <div className="md:col-span-7">
               <span className="inline-flex items-center gap-2 rounded-[50px] border border-primary/40 bg-primary/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-primary">
                 <BeeLogo /> Consultoria Híbrida BP
               </span>
@@ -225,7 +467,7 @@ function BeePrimeLanding() {
                   href="#oferta"
                   className="inline-flex items-center gap-2 rounded-[50px] bg-primary px-6 py-3.5 text-[15px] font-semibold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  Garantir minha vaga <ArrowRight size={18} />
+                  Aplicar para uma vaga <ArrowRight size={18} />
                 </a>
                 <a
                   href="#metodo"
@@ -234,12 +476,26 @@ function BeePrimeLanding() {
                   Conhecer o Método
                 </a>
               </div>
+
+              <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <Stat value="R$100M+" label="Geridos por clientes BP" />
+                <Stat value="8 estados + PY" label="Abrangência territorial" />
+                <Stat value="12 meses" label="Acompanhamento contínuo" />
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 md:col-span-4 sm:grid-cols-3 md:grid-cols-1">
-              <Stat value="R$100M+" label="Geridos por clientes BP" />
-              <Stat value="8 estados + PY" label="Abrangência territorial" />
-              <Stat value="12 meses" label="Acompanhamento contínuo" />
+            {/* Image slot — right side */}
+            <div className="bp-reveal md:col-span-5">
+              <div className="relative overflow-hidden rounded-sm border border-border">
+                <img
+                  src={heroImage}
+                  alt="Médico empresário no comando da clínica"
+                  width={1280}
+                  height={1280}
+                  className="h-[360px] w-full object-cover md:h-[560px]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-primary/10" />
+              </div>
             </div>
           </div>
         </div>
@@ -515,60 +771,8 @@ function BeePrimeLanding() {
         </div>
       </section>
 
-      {/* OFFER */}
-      <section id="oferta" className="border-t border-border bg-muted/40 py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <div className="bp-reveal grid gap-10 rounded-sm border border-primary/40 bg-card p-7 md:grid-cols-2 md:p-12">
-            <div>
-              <span className="text-[12px] font-mono uppercase tracking-[0.2em] text-primary">
-                08 — A oferta
-              </span>
-              <h2 className="mt-3 text-[28px] font-extrabold leading-tight md:text-[40px]">
-                Consultoria Empresarial BP — <span className="text-primary">12 meses.</span>
-              </h2>
-              <ul className="mt-7 space-y-3 text-[15px] text-foreground">
-                {[
-                  "Diagnóstico completo da clínica",
-                  "Plano de ação personalizado",
-                  "Reuniões online ilimitadas",
-                  "1 visita presencial por mês",
-                  "Acesso integral aos 7 pilares do Método Colmeia®",
-                ].map((t) => (
-                  <li key={t} className="flex gap-3">
-                    <Check size={18} className="mt-1 shrink-0 text-primary" />
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col justify-between rounded-sm border border-border bg-background p-7">
-              <div>
-                <div className="text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Investimento total
-                </div>
-                <div className="mt-2 text-[44px] font-extrabold leading-none text-foreground">
-                  R$ 96.000
-                </div>
-                <div className="mt-3 text-[15px] text-muted-foreground">
-                  Entrada + 11x de <strong className="text-foreground">R$ 8.000</strong>
-                </div>
-                <ul className="mt-6 space-y-2 text-[13px] text-muted-foreground">
-                  <li className="flex gap-2"><DollarSign size={14} className="mt-1 text-primary" /> Pagamento via boleto bancário.</li>
-                  <li className="flex gap-2"><MapPin size={14} className="mt-1 text-primary" /> Despesas dos encontros presenciais não inclusas.</li>
-                </ul>
-              </div>
-
-              <a
-                href="https://bpgestao.com.br/"
-                className="bp-pulse mt-8 inline-flex items-center justify-center gap-2 rounded-[50px] bg-primary px-6 py-4 text-[16px] font-bold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Garantir minha vaga <ArrowRight size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* APPLICATION FORM */}
+      <ApplicationSection />
 
       {/* FAQ */}
       <section id="faq" className="border-t border-border py-20 md:py-28">
@@ -610,7 +814,7 @@ function BeePrimeLanding() {
               href="#oferta"
               className="bp-pulse inline-flex items-center gap-2 rounded-[50px] bg-primary px-7 py-4 text-[16px] font-bold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              Garantir minha vaga <ArrowRight size={18} />
+              Enviar minha aplicação <ArrowRight size={18} />
             </a>
             <a
               href="#metodo"
