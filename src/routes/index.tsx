@@ -174,10 +174,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 /* ---------- Page ---------- */
 function BeePrimeLanding() {
-  return <BeePrimeLandingInner />;
-}
-
-function BeePrimeLandingInner() {
   useReveal();
 
   const pillars = [
