@@ -17,8 +17,6 @@ import {
   Send,
   Loader2,
 } from "lucide-react";
-import heroImage from "@/assets/hero-bp.jpg";
-
 export const Route = createFileRoute("/")({
   component: BeePrimeLanding,
 });
@@ -442,61 +440,64 @@ function BeePrimeLanding() {
     <main id="top" className="min-h-screen bg-background text-foreground">
       <Nav />
 
-      {/* HERO */}
-      <section className="bp-honeycomb relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <div className="grid gap-12 md:grid-cols-12 md:items-center">
-            <div className="md:col-span-7">
-              <span className="inline-flex items-center gap-2 rounded-[50px] border border-primary/40 bg-primary/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-primary">
-                <BeeLogo /> Consultoria Híbrida BP
-              </span>
-              <h1 className="mt-5 text-[34px] font-extrabold leading-[1.05] tracking-tight md:text-[64px]">
-                Pare de ter uma agenda cheia
-                <br />
-                e comece a ter um{" "}
-                <span className="text-primary">negócio lucrativo</span>.
-              </h1>
-              <p className="mt-6 max-w-2xl text-[16px] text-muted-foreground md:text-[17px]">
-                Método Colmeia® — o sistema de 7 pilares que tira o médico da
-                cadeira de operador e o coloca na cadeira de CEO. 12 meses de
-                acompanhamento híbrido para construir uma clínica que roda
-                sem você.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#oferta"
-                  className="inline-flex items-center gap-2 rounded-[50px] bg-primary px-6 py-3.5 text-[15px] font-semibold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                >
-                  Aplicar para uma vaga <ArrowRight size={18} />
-                </a>
-                <a
-                  href="#metodo"
-                  className="inline-flex items-center gap-2 rounded-[50px] border border-border bg-transparent px-6 py-3.5 text-[15px] font-semibold text-foreground hover:bg-muted transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                >
-                  Conhecer o Método
-                </a>
-              </div>
+      {/* HERO — VSL */}
+      <section className="bp-honeycomb relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-24">
+        <div className="mx-auto max-w-5xl px-5 md:px-8">
+          <div className="bp-reveal text-center">
+            <span className="inline-flex items-center gap-2 rounded-[50px] border border-primary/40 bg-primary/10 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-primary">
+              <BeeLogo /> Consultoria Híbrida BP
+            </span>
+            <h1 className="mx-auto mt-5 max-w-4xl text-[32px] font-extrabold leading-[1.05] tracking-tight md:text-[56px]">
+              Pare de ter uma agenda cheia e comece a ter um{" "}
+              <span className="text-primary">negócio lucrativo</span>.
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-[16px] text-muted-foreground md:text-[17px]">
+              Assista ao vídeo abaixo até o final — em poucos minutos você
+              entende por que o Método Colmeia® é diferente de tudo que já
+              te ofereceram.
+            </p>
+          </div>
 
-              <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                <Stat value="R$100M+" label="Geridos por clientes BP" />
-                <Stat value="8 estados + PY" label="Abrangência territorial" />
-                <Stat value="12 meses" label="Acompanhamento contínuo" />
-              </div>
+          {/* VSL slot */}
+          <div className="bp-reveal mt-10 md:mt-12">
+            <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm border border-primary/40 bg-card shadow-[0_0_60px_-20px_oklch(0.68_0.13_55_/_0.5)]">
+              {/* Replace this <video>/<iframe> source with your VSL URL */}
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster=""
+                className="absolute inset-0 h-full w-full bg-black object-cover"
+              >
+                <source src="" type="video/mp4" />
+                Seu navegador não suporta vídeo HTML5.
+              </video>
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-primary/20" />
             </div>
+            <p className="mt-3 text-center text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+              ▶ VSL — Assista com o som ligado
+            </p>
+          </div>
 
-            {/* Image slot — right side */}
-            <div className="bp-reveal md:col-span-5">
-              <div className="relative overflow-hidden rounded-sm border border-border">
-                <img
-                  src={heroImage}
-                  alt="Médico empresário no comando da clínica"
-                  width={1280}
-                  height={1280}
-                  className="h-[360px] w-full object-cover md:h-[560px]"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-primary/10" />
-              </div>
-            </div>
+          <div className="bp-reveal mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#oferta"
+              className="bp-pulse inline-flex items-center gap-2 rounded-[50px] bg-primary px-6 py-3.5 text-[15px] font-semibold text-primary-foreground hover:brightness-110 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Aplicar para uma vaga <ArrowRight size={18} />
+            </a>
+            <a
+              href="#metodo"
+              className="inline-flex items-center gap-2 rounded-[50px] border border-border bg-transparent px-6 py-3.5 text-[15px] font-semibold text-foreground hover:bg-muted transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Conhecer o Método
+            </a>
+          </div>
+
+          <div className="bp-reveal mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <Stat value="R$100M+" label="Geridos por clientes BP" />
+            <Stat value="8 estados + 🇵🇾" label="Abrangência territorial" />
+            <Stat value="12 meses" label="Acompanhamento contínuo" />
           </div>
         </div>
       </section>
@@ -582,7 +583,7 @@ function BeePrimeLanding() {
             {[
               { v: "+R$500k", l: "Faturamento mensal da clínica-laboratório" },
               { v: "R$100M+", l: "Geridos pelos clientes da BP" },
-              { v: "8 + PY", l: "Estados com clientes ativos" },
+              { v: "8 + 🇵🇾", l: "Estados com clientes ativos" },
               { v: "12 meses", l: "Acompanhamento híbrido contínuo" },
             ].map((s) => (
               <div key={s.l} className="bp-reveal">
